@@ -1,0 +1,26 @@
+
+body{
+    background-position: center;
+    background-size: cover;
+}
+
+.a_tag{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 250px;
+    border-radius: 20px;
+    border: white 2px solid;
+    background-color: white;
+    color: rgb(255, 0, 255);
+}
+
+.heading{
+    color: white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 50px;
+}
+
+.a_tag:hover{
+    cursor: pointer;
+    box-shadow: white 1px 1px 18px;
+}
