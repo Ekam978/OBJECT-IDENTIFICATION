@@ -1,5 +1,6 @@
 img = "";
 status ="";
+objects = [];
 
 function preload() {
     img = loadImage("tv.jpg");
@@ -24,25 +25,21 @@ function gotResult(error , results) {
         console.error(error);
     }
     console.log(results);
+    objects = results;
 }
 
-function draw() {
+function draw() 
+{
     image(img,0,0,640,420);
-    fill("#FF0000");
-    text("Television", 150 , 95);
-    noFill();
-    stroke("#FF0000");
-    rect(145,80,350,250);
-
-    fill("#FF0000");
-    text("Pot" , 520 , 220);
-    noFill();
-    stroke("#FF0000");
-    rect(510,200,80,170);
-    
-    fill("#FF0000");
-    text("Books" , 30 , 330);
-    noFill();
-    stroke("#FF0000");
-    rect(10,310,120,60);
+    if (status != true) {
+        for (i =0 ;i< objects.length ; i++) {
+            fill("#FF0000");
+            document.getElementById("status").innerHTML = "Object Detected";
+            percentage = floor(objects[i].confidence * 100);
+            text(objects[i].label + " " + objects[i].confidence + "%" , objects[i].x + 15 , objects[i].y + 15);
+            noFill();
+            stroke("#FF0000");
+            rect(objects[i].x , objects[i].y , objects[i].width , objects[i].height);
+        }
+    }
 }

@@ -1,5 +1,6 @@
 img = "";
 status ="";
+objects = [];
 
 function preload() {
     img = loadImage("background.jpg");
@@ -24,25 +25,21 @@ function gotResult(error , results) {
         console.error(error);
     }
     console.log(results);
+    objects = results;
 }
 
-function draw() {
+function draw() 
+{
     image(img,0,0,640,420);
-    fill("#FF0000");
-    text("Bed", 260 , 200);
-    noFill();
-    stroke("#FF0000");
-    rect(240,180,380,220);
-
-    fill("#FF0000");
-    text("Desk" , 40 , 120);
-    noFill();
-    stroke("#FF0000");
-    rect(20,100,250,300);
-    
-    fill("#FF0000");
-    text("Chair" , 60 , 220);
-    noFill();
-    stroke("#FF0000");
-    rect(40,200,120,200);
+    if (status != true) {
+        for (i =0 ;i< objects.length ; i++) {
+            fill("#FF0000");
+            document.getElementById("status").innerHTML = "Object Detected";
+            percentage = floor(objects[i].confidence * 100);
+            text(objects[i].label + " " + objects[i].confidence + "%" , objects[i].x + 15 , objects[i].y + 15);
+            noFill();
+            stroke("#FF0000");
+            rect(objects[i].x , objects[i].y , objects[i].width , objects[i].height);
+        }
+    }
 }

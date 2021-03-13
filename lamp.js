@@ -1,5 +1,6 @@
 img = "";
 status ="";
+objects = [];
 
 function preload() {
     img = loadImage("lamp.jpg");
@@ -24,31 +25,21 @@ function gotResult(error , results) {
         console.error(error);
     }
     console.log(results);
+    objects = results;
 }
 
-function draw() {
+function draw() 
+{
     image(img,0,0,640,420);
-    fill("#FF0000");
-    text("Lamp", 320 , 50);
-    noFill();
-    stroke("#FF0000");
-    rect(300,30,150,300);
-
-    fill("#FF0000");
-    text("Pot" , 150 , 210);
-    noFill();
-    stroke("#FF0000");
-    rect(130,190,80,80);
-    
-    fill("#FF0000");
-    text("Books" , 100 , 275);
-    noFill();
-    stroke("#FF0000");
-    rect(90,255,120,60);
-    
-    fill("#FF0000");
-    text("Cup" , 220 , 265);
-    noFill();
-    stroke("#FF0000");
-    rect(190,245,80,80);
+    if (status != true) {
+        for (i =0 ;i< objects.length ; i++) {
+            fill("#FF0000");
+            document.getElementById("status").innerHTML = "Object Detected";
+            percentage = floor(objects[i].confidence * 100);
+            text(objects[i].label + " " + objects[i].confidence + "%" , objects[i].x + 15 , objects[i].y + 15);
+            noFill();
+            stroke("#FF0000");
+            rect(objects[i].x , objects[i].y , objects[i].width , objects[i].height);
+        }
+    }
 }
