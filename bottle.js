@@ -35,6 +35,8 @@ function draw()
         for (i =0 ;i< objects.length ; i++) {
             fill("#FF0000");
             document.getElementById("status").innerHTML = "Object Detected";
+            document.getElementById("length").innerHTML = objects.length;
+
             percentage = floor(objects[i].confidence * 100);
             text(objects[i].label + " " + objects[i].confidence + "%" , objects[i].x + 15 , objects[i].y + 15);
             noFill();
